@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Github App</string>
+    <string name="email_hint">Enter email</string>
+    <string name="password_hint">Enter password</string>
+    <string name="button_login">LOGIN</string>
+    <string name="followers"> followers</string>
+    <string name="following">following</string>
 </resources>
