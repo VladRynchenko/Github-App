@@ -8,7 +8,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component()
+@Component(modules = [RemoteModule::class])
 interface AppComponent {
 
     @Component.Factory
@@ -16,7 +16,7 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    fun inject(fragment: LoginFragment)
+    fun loginComponent(): LoginComponent.Factory
     fun inject(mainActivity: MainActivity)
 
 }
