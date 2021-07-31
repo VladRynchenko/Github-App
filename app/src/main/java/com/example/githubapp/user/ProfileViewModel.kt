@@ -16,7 +16,7 @@ class ProfileViewModel @Inject constructor(var repository: ProfileRepository) : 
         get() = _userData
 
 
-    fun getData(userName: String){
+    fun getData(userName: String) {
         getUserData(userName)
         getStarCount(userName)
     }
@@ -37,6 +37,7 @@ class ProfileViewModel @Inject constructor(var repository: ProfileRepository) : 
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _userData.value?.star = it.size
+                _userData.postValue(_userData.value)
                 Log.d(ProfileViewModel::class.java.simpleName, it.size.toString())
                 return@subscribe
             }, {
