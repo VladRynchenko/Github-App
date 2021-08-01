@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.githubapp.MyApplication
 import com.example.githubapp.api.AccessToken
 import com.example.githubapp.api.GitHubApi
@@ -53,6 +55,7 @@ class LoginFragment : Fragment() {
             )
             startActivity(intent)
         }
+
         return binding.root
     }
 
@@ -61,7 +64,7 @@ class LoginFragment : Fragment() {
 
         val uri = activity?.intent?.data
         if (uri != null && uri.toString().startsWith("gitapp://callback")) {
-            uri.getQueryParameter("code")?.let { viewModel.getAccessToken(it) }
+            viewModel.getAccessToken(uri.getQueryParameter("code")!!)
         }
     }
 }
