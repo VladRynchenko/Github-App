@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class ProfileViewModel @Inject constructor(val repository: ProfileRepository) : ViewModel() {
+class ProfileViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
     private val _userData = MutableLiveData<UserData>()
     val userData: LiveData<UserData>
         get() = _userData

@@ -5,4 +5,6 @@
     <string name="button_login">LOGIN</string>
     <string name="followers"> followers</string>
     <string name="following">following</string>
+    <string name="thousands">k</string>
+    <string name="millions">M</string>
 </resources>

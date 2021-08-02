@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
+import java.text.DecimalFormat
 
 
 @BindingAdapter("app:hideIfNull")
@@ -19,10 +20,11 @@ fun uploadImage(view: ImageView, string: String?) {
 
 @BindingAdapter("app:roundingCount")
 fun roundCount(view: TextView, int: Int) {
+    val numberFormat = DecimalFormat("###.#")
     view.text = when (int) {
-        in 0..1000 -> "$int"
-        in 1000..1000000 -> "${int / 1000}.${(int % 1000) / 100}k"
-        else -> "${int / 1000000}.${(int % 1000000) / 100000}M"
+        in 0..1000 -> numberFormat.format(int)
+        in 1000..1000000 -> numberFormat.format(int.toFloat() / 1000) + view.context.getString(R.string.thousands)
+        else -> numberFormat.format(int.toFloat() / 1000000) + view.context.getString(R.string.millions)
     }
 }
 
