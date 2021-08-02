@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,9 @@ class LoginFragment : Fragment() {
                 .create(context)
         loginComponent.inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
+        val token = viewModel.getSavedToken()
+        if (token != null)
+            Log.e(LoginViewModel::class.simpleName, token.accessToken)
         super.onAttach(context)
     }
 
