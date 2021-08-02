@@ -9,11 +9,10 @@ import io.reactivex.rxjava3.core.Observable
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class LoginRepository @Inject constructor(@LoginApi val retrofit: Retrofit) {
+class LoginRepository @Inject constructor(@LoginApi val retrofit: GitHubApi) {
 
     fun getAccessToken(code: String): Observable<AccessToken> {
-        val client = retrofit.create(GitHubApi::class.java)
-        return client.getToken(CLIENT_ID, CLIENT_SECRET, code)
+        return retrofit.getToken(CLIENT_ID, CLIENT_SECRET, code)
     }
 
 
