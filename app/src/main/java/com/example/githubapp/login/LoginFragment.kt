@@ -4,18 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.githubapp.MyApplication
 import com.example.githubapp.api.AccessToken
 import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.databinding.FragmentLoginBinding
 import com.example.githubapp.di.RemoteModule
+import com.example.githubapp.di.ViewModelProvideFactory
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -29,6 +29,7 @@ import javax.inject.Inject
 class LoginFragment : Fragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelProvideFactory
     lateinit var viewModel: LoginViewModel
 
     override fun onAttach(context: Context) {
@@ -36,6 +37,7 @@ class LoginFragment : Fragment() {
             (context.applicationContext as MyApplication).appComponent.loginComponent()
                 .create(context)
         loginComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
         super.onAttach(context)
     }
 
@@ -55,7 +57,6 @@ class LoginFragment : Fragment() {
             )
             startActivity(intent)
         }
-
         return binding.root
     }
 
@@ -64,7 +65,7 @@ class LoginFragment : Fragment() {
 
         val uri = activity?.intent?.data
         if (uri != null && uri.toString().startsWith("gitapp://callback")) {
-            viewModel.getAccessToken(uri.getQueryParameter("code")!!)
+            uri.getQueryParameter("code")?.let { viewModel.getAccessToken(it) }
         }
     }
 }
