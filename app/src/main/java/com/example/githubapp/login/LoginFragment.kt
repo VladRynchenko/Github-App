@@ -9,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.githubapp.MyApplication
 import com.example.githubapp.api.AccessToken
 import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.databinding.FragmentLoginBinding
 import com.example.githubapp.di.RemoteModule
+import com.example.githubapp.di.ViewModelProvideFactory
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -27,6 +29,7 @@ import javax.inject.Inject
 class LoginFragment : Fragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelProvideFactory
     lateinit var viewModel: LoginViewModel
 
     override fun onAttach(context: Context) {
@@ -34,6 +37,7 @@ class LoginFragment : Fragment() {
             (context.applicationContext as MyApplication).appComponent.loginComponent()
                 .create(context)
         loginComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
         super.onAttach(context)
     }
 
