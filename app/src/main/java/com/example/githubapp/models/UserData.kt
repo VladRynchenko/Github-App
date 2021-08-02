@@ -2,19 +2,19 @@ package com.example.githubapp.models
 
 data class UserData(
     val login: String,
-    var avatar_url: String?,
-    var name: String?,
+    val avatar_url: String?,
+    val name: String?,
     var star: Int = 0,
-    var company: String?,
-    var blog: String?,
-    var location: String?,
-    var email: String?,
-    var bio: String?,
-    var twitter_username: String?,
-    var public_repos: Int?,
-    var public_gists: Int?,
-    var followers: Int = 0,
-    var following: Int = 0
+    val company: String?,
+    val blog: String?,
+    val location: String?,
+    val email: String?,
+    val bio: String?,
+    val twitter_username: String?,
+    val public_repos: Int?,
+    val public_gists: Int?,
+    val followers: Int = 0,
+    val following: Int = 0
 ) {
 
 }

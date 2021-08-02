@@ -34,7 +34,7 @@ class ProfileFragment() : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.getData("VladRynchenko")
+        viewModel.getData("AlexGyver")
 
         return binding.root
     }
