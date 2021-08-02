@@ -1,5 +1,6 @@
 package com.example.githubapp.di
 
+import com.example.githubapp.api.GitHubApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -8,6 +9,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -30,13 +32,13 @@ class RemoteModule {
     @LoginApi
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): GitHubApi {
         return Retrofit.Builder()
             .baseUrl(Companion.BASE_URL_SITE)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(okHttpClient)
-            .build()
+            .build().create(GitHubApi::class.java)
     }
 
     companion object {
