@@ -1,4 +1,4 @@
-/app/src/main/java/com/example/githubapp/secret/Tokens.kt
+/app/src/main/java/com/example/githubapp/secret/
 *.iml
 .gradle
 /local.properties

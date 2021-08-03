@@ -1,29 +1,19 @@
-package com.example.githubapp.login
+package com.example.githubapp.auth
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubapp.MyApplication
-import com.example.githubapp.api.AccessToken
-import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.databinding.FragmentLoginBinding
-import com.example.githubapp.di.RemoteModule
 import com.example.githubapp.di.ViewModelProvideFactory
-import com.google.gson.GsonBuilder
-import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.githubapp.login.CLIENT_ID
 import javax.inject.Inject
 
 class LoginFragment : Fragment() {
@@ -38,6 +28,10 @@ class LoginFragment : Fragment() {
                 .create(context)
         loginComponent.inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
+
+        val token = viewModel.getSavedToken()
+        if (token != null)
+            Log.e(LoginViewModel::class.simpleName, token.accessToken)
         super.onAttach(context)
     }
 

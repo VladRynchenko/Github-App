@@ -2,7 +2,7 @@ package com.example.githubapp.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubapp.login.LoginViewModel
+import com.example.githubapp.auth.LoginViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

@@ -1,7 +1,7 @@
 package com.example.githubapp.di
 
 import android.content.Context
-import com.example.githubapp.login.LoginFragment
+import com.example.githubapp.auth.LoginFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
 
