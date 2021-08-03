@@ -1,6 +1,19 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+app/src/main/java/com/example/githubapp/login/Tokens.kt
 /build
-src/main/java/com/example/githubapp/login/Tokens.kt
-
+/captures
+.externalNativeBuild
+.cxx
+local.properties
 # Built application files
 *.apk
 *.aar
