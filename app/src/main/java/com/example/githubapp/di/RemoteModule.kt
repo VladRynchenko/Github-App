@@ -17,6 +17,11 @@ import javax.inject.Singleton
 @Qualifier
 annotation class LoginApi
 
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class BaseApi
+
+
 @Module
 class RemoteModule {
 
@@ -32,7 +37,7 @@ class RemoteModule {
     @LoginApi
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): GitHubApi {
+    fun provideRetrofitLogin(gson: Gson, okHttpClient: OkHttpClient): GitHubApi {
         return Retrofit.Builder()
             .baseUrl(Companion.BASE_URL_SITE)
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -41,8 +46,20 @@ class RemoteModule {
             .build().create(GitHubApi::class.java)
     }
 
+    @BaseApi
+    @Provides
+    @Singleton
+    fun provideRetrofitBase(gson: Gson, okHttpClient: OkHttpClient): GitHubApi {
+        return Retrofit.Builder()
+            .baseUrl(Companion.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .client(okHttpClient)
+            .build().create(GitHubApi::class.java)
+    }
+
     companion object {
         const val BASE_URL_SITE = "https://github.com"
-
+        const val BASE_URL = "https://api.github.com"
     }
 }

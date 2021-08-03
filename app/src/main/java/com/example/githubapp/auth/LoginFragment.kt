@@ -11,11 +11,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubapp.MyApplication
-import com.example.githubapp.api.authPath
 import com.example.githubapp.databinding.FragmentLoginBinding
 import com.example.githubapp.di.ViewModelProvideFactory
 import com.example.githubapp.login.CLIENT_ID
 import javax.inject.Inject
+
+
+const val authPath = "https://github.com/login/oauth/authorize/"
 
 class LoginFragment : Fragment() {
 
