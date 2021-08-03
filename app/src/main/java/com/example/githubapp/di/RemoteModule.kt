@@ -1,6 +1,8 @@
 package com.example.githubapp.di
 
+import com.example.githubapp.api.AccessToken
 import com.example.githubapp.api.GitHubApi
+import com.example.githubapp.repository.UserDataStorage
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -29,17 +31,30 @@ class RemoteModule {
     @Singleton
     fun provideGson(): Gson = GsonBuilder().create()
 
+    @LoginApi
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient =
         OkHttpClient.Builder().build()
 
+    @BaseApi
+    @Provides
+    @Singleton
+    fun provideOkHttpClientAuth(storage: UserDataStorage): OkHttpClient =
+        OkHttpClient.Builder().addInterceptor { chain ->
+            val token = storage.getToken()
+            val request = chain.request().newBuilder().addHeader(
+                "Authorization", "${token?.tokenType} ${token?.accessToken}"
+            ).build()
+            chain.proceed(request)
+        }.build()
+
     @LoginApi
     @Provides
     @Singleton
-    fun provideRetrofitLogin(gson: Gson, okHttpClient: OkHttpClient): GitHubApi {
+    fun provideRetrofitLogin(gson: Gson, @LoginApi okHttpClient: OkHttpClient): GitHubApi {
         return Retrofit.Builder()
-            .baseUrl(Companion.BASE_URL_SITE)
+            .baseUrl(BASE_URL_SITE)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(okHttpClient)
@@ -49,9 +64,9 @@ class RemoteModule {
     @BaseApi
     @Provides
     @Singleton
-    fun provideRetrofitBase(gson: Gson, okHttpClient: OkHttpClient): GitHubApi {
+    fun provideRetrofitBase(gson: Gson, @BaseApi okHttpClient: OkHttpClient): GitHubApi {
         return Retrofit.Builder()
-            .baseUrl(Companion.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(okHttpClient)

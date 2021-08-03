@@ -1,5 +1,6 @@
 package com.example.githubapp.repository
 
+import android.util.Log
 import com.example.githubapp.api.AccessToken
 import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.di.LoginApi
@@ -10,8 +11,9 @@ import io.reactivex.rxjava3.core.Observable
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class LoginRepository @Inject constructor(@LoginApi val retrofit: GitHubApi,
-                                          private val storage: Storage
+class LoginRepository @Inject constructor(
+    @LoginApi val retrofit: GitHubApi,
+    private val storage: Storage
 ) {
 
     fun getAccessToken(code: String): Observable<AccessToken> {
@@ -19,13 +21,14 @@ class LoginRepository @Inject constructor(@LoginApi val retrofit: GitHubApi,
     }
 
     fun saveToken(token: AccessToken) {
+        Log.e("Save token", token.accessToken)
         storage.saveToken(token)
     }
 
     fun getToken(): AccessToken? {
+        Log.e("GetToken", storage.getToken()?.accessToken.toString())
         return storage.getToken()
     }
-
 
 
 }

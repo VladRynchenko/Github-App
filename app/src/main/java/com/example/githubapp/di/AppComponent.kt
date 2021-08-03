@@ -1,7 +1,6 @@
 package com.example.githubapp.di
 
 import android.content.Context
-import androidx.fragment.app.Fragment
 import com.example.githubapp.MainActivity
 import com.example.githubapp.user.ProfileFragment
 import dagger.BindsInstance
@@ -19,6 +18,6 @@ interface AppComponent {
 
     fun loginComponent(): LoginComponent.Factory
     fun inject(fragment: ProfileFragment)
-    fun inject(mainActivity: MainActivity)
+    fun inject(activity: MainActivity)
 
 }
