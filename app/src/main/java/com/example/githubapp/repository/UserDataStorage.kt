@@ -1,9 +1,7 @@
 package com.example.githubapp.repository
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.example.githubapp.api.AccessToken
-import com.example.githubapp.di.Storage
 import com.google.gson.Gson
 import javax.inject.Inject
 

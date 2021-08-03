@@ -1,4 +1,4 @@
-package com.example.githubapp
+package com.example.githubapp.main
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

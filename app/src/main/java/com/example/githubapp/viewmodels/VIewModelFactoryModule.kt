@@ -1,10 +1,11 @@
-package com.example.githubapp.di
+package com.example.githubapp.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubapp.MainViewModel
+import com.example.githubapp.main.MainViewModel
 import com.example.githubapp.auth.LoginViewModel
-import com.example.githubapp.user.ProfileViewModel
+import com.example.githubapp.profile.ProfileViewModel
+import com.example.githubapp.viewmodels.ViewModelProvideFactory
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

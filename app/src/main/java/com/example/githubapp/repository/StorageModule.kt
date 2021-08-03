@@ -1,7 +1,6 @@
-package com.example.githubapp.di
+package com.example.githubapp.repository
 
 import android.content.Context
-import com.example.githubapp.repository.UserDataStorage
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides

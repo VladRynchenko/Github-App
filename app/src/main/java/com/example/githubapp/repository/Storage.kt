@@ -1,4 +1,4 @@
-package com.example.githubapp.di
+package com.example.githubapp.repository
 
 import androidx.lifecycle.LiveData
 import com.example.githubapp.api.AccessToken

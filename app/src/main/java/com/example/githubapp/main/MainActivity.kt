@@ -1,10 +1,12 @@
-package com.example.githubapp
+package com.example.githubapp.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.githubapp.di.ViewModelProvideFactory
+import com.example.githubapp.MyApplication
+import com.example.githubapp.R
+import com.example.githubapp.viewmodels.ViewModelProvideFactory
 import com.example.githubapp.repository.LoginRepository
 import javax.inject.Inject
 
