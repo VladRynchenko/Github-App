@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.githubapp.login.LoginViewModel" />
+            type="com.example.githubapp.auth.LoginViewModel" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
