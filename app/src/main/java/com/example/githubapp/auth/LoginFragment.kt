@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubapp.MyApplication
+import com.example.githubapp.api.authPath
 import com.example.githubapp.databinding.FragmentLoginBinding
 import com.example.githubapp.di.ViewModelProvideFactory
 import com.example.githubapp.login.CLIENT_ID
@@ -47,7 +48,7 @@ class LoginFragment : Fragment() {
         binding.loginButton.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/login/oauth/authorize?client_id=$CLIENT_ID")
+                Uri.parse("$authPath?client_id=$CLIENT_ID")
             )
             startActivity(intent)
         }
