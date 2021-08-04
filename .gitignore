@@ -1,3 +1,4 @@
+/app/src/main/java/com/example/githubapp/secret/
 *.iml
 .gradle
 /local.properties
@@ -8,7 +9,6 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-app/src/main/java/com/example/githubapp/login/Tokens.kt
 /build
 /captures
 .externalNativeBuild

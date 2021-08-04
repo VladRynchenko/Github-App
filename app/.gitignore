@@ -1,5 +1,4 @@
 /build
-src/main/java/com/example/githubapp/login/Tokens.kt
 
 # Built application files
 *.apk
@@ -24,6 +23,7 @@ out/
 .gradle/
 build/
 
+.DS_Store
 # Local configuration file (sdk path, etc)
 local.properties
 
