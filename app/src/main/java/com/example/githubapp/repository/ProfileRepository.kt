@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Observer
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class ProfileRepository @Inject constructor(@BaseApi val retrofit: GitHubApi) {
+class ProfileRepository @Inject constructor(private val retrofit: GitHubApi) {
 
     fun getProfile(userId: String): Observable<UserData> {
         return retrofit.getUserProfile(userId)

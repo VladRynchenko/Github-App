@@ -2,6 +2,7 @@ package com.example.githubapp.di
 
 import com.example.githubapp.api.AccessToken
 import com.example.githubapp.api.GitHubApi
+import com.example.githubapp.api.GitHubAuthApi
 import com.example.githubapp.repository.UserDataStorage
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -49,19 +50,17 @@ class RemoteModule {
             chain.proceed(request)
         }.build()
 
-    @LoginApi
     @Provides
     @Singleton
-    fun provideRetrofitLogin(gson: Gson, @LoginApi okHttpClient: OkHttpClient): GitHubApi {
+    fun provideRetrofitLogin(gson: Gson, @LoginApi okHttpClient: OkHttpClient): GitHubAuthApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL_SITE)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(okHttpClient)
-            .build().create(GitHubApi::class.java)
+            .build().create(GitHubAuthApi::class.java)
     }
 
-    @BaseApi
     @Provides
     @Singleton
     fun provideRetrofitBase(gson: Gson, @BaseApi okHttpClient: OkHttpClient): GitHubApi {

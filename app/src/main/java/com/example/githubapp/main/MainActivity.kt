@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.githubapp.MyApplication
 import com.example.githubapp.R
 import com.example.githubapp.viewmodels.ViewModelProvideFactory
@@ -27,10 +28,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (loginRepos.getToken() == null) {
-            findNavController(R.id.myNavHostFragment)
-                .navigate(R.id.loginFragment)
+            val navHostFragment = supportFragmentManager
+                .findFragmentById(R.id.myNavHostFragment) as NavHostFragment
+            navHostFragment.navController.navigate(R.id.loginFragment)
         }
-
 
     }
 }
