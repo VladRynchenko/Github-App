@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentLoginBinding
 import com.example.githubapp.viewmodels.ViewModelProvideFactory
-import com.example.githubapp.login.CLIENT_ID
+import com.example.githubapp.secret.CLIENT_ID
 import javax.inject.Inject
 
 

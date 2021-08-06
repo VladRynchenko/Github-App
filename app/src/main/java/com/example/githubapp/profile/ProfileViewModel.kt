@@ -18,27 +18,33 @@ class ProfileViewModel @Inject constructor(private val repository: ProfileReposi
     val userStars: LiveData<Int>
         get() = _userStars
 
+    private val _navigatingToLogin = MutableLiveData<Boolean>()
+    val navigatingToLogin: LiveData<Boolean>
+        get() = _navigatingToLogin
 
-    fun getData(userName: String) {
-        getUserData(userName)
-        getStarCount(userName)
+
+    fun getData() {
+        getUserData()
+        getStarCount()
     }
 
-    fun getUserData(userName: String) {
-        repository.getProfile(userName).subscribeOn(Schedulers.io())
+    private fun getUserData() {
+        repository.getProfile().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _userData.value = it
             }, {
                 Log.e(ProfileViewModel::class.java.simpleName, it.message.toString())
+                _navigatingToLogin.value = true
             })
     }
 
-    fun getStarCount(userName: String) {
-        repository.getStarredList(userName).subscribeOn(Schedulers.io())
+
+    private fun getStarCount() {
+        repository.getStarredList().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ listStar ->
-                _userStars.value = listStar.size
+            .subscribe({ list ->
+                _userStars.value = list.size
             }, {
                 Log.e(ProfileViewModel::class.java.simpleName, it.message.toString())
             })
