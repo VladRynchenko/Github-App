@@ -29,15 +29,8 @@ class ReposViewModel @Inject constructor(private val repository: ProfileReposito
     }
 
     fun searchRepo(query: String) {
-        if (query.isNotEmpty()) {
-            val subList = ArrayList<Repos>()
-            list.forEach {
-                if (it.name.contains(query, true))
-                    subList.add(it)
-            }
-            _reposList.value = subList
-        } else {
-            _reposList.value = list
+        _reposList.value = list.filter {
+            it.name.contains(query, true)
         }
     }
 }
