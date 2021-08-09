@@ -4,10 +4,9 @@ import com.example.githubapp.models.Repos
 import com.example.githubapp.models.SearchResponse
 import com.example.githubapp.models.UserData
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Single
-import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface GitHubApi {
 
