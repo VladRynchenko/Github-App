@@ -17,11 +17,13 @@ const val USER_QUALIFIER = " user:"
 class ProfileRepository @Inject constructor(private val retrofit: GitHubApi) {
     var userData: UserData? = null
 
-    fun getProfile(): Observable<UserData> {
-        return retrofit.getUserProfile()
+    fun getProfile(): Single<UserData> {
+        return retrofit.getUserProfile().doOnSuccess {
+            userData = it
+        }
     }
 
-    fun getStarredList(): Observable<List<Repos>> {
+    fun getStarredList(): Single<List<Repos>> {
         return retrofit.getStarred()
     }
 

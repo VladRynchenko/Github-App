@@ -11,10 +11,10 @@ import retrofit2.http.Query
 interface GitHubApi {
 
     @GET("user")
-    fun getUserProfile(): Observable<UserData>
+    fun getUserProfile(): Single<UserData>
 
     @GET("user/starred")
-    fun getStarred(): Observable<List<Repos>>
+    fun getStarred(): Single<List<Repos>>
 
     @GET("user/repos")
     fun getRepos(): Single<List<Repos>>
