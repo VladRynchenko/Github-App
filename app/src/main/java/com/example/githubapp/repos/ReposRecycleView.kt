@@ -23,12 +23,12 @@ class ReposRecycleView : ListAdapter<DataItem, RecyclerView.ViewHolder>(diffUtil
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == R.layout.repo_view_item) {
+        return if (viewType == R.layout.repo_view_item) {
             val binding = RepoViewItemBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
-            return RepoViewHolder(binding)
+            RepoViewHolder(binding)
         } else {
-            return TextViewHolder.create(parent)
+            TextViewHolder.create(parent)
         }
     }
 
