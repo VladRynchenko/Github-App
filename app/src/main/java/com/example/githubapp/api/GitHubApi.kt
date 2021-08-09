@@ -1,6 +1,7 @@
 package com.example.githubapp.api
 
 import com.example.githubapp.models.Repos
+import com.example.githubapp.models.SearchResponse
 import com.example.githubapp.models.UserData
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -18,4 +19,11 @@ interface GitHubApi {
 
     @GET("user/repos")
     fun getRepos(): Single<List<Repos>>
+
+    @GET("search/repositories")
+    fun searchRepos(
+        @Query("q") query: String,
+        @Query("per_page") per_page: Int,
+        @Query("page") page: Int
+    ): Single<SearchResponse>
 }

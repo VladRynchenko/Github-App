@@ -33,6 +33,8 @@ class ProfileViewModel @Inject constructor(private val repository: ProfileReposi
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _userData.value = it
+                repository.userData = it
+
             }, {
                 Log.e(ProfileViewModel::class.java.simpleName, it.message.toString())
                 _navigatingToLogin.value = true

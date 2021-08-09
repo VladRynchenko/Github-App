@@ -12,26 +12,18 @@ import javax.inject.Inject
 
 class ReposViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
 
-    private lateinit var list: List<Repos>
     private val _reposList = MutableLiveData<List<Repos>>()
     val reposList: LiveData<List<Repos>>
         get() = _reposList
 
 
-    fun getRepos() {
-        repository.getReposList().observeOn(AndroidSchedulers.mainThread())
+    fun getRepos(query: String) {
+        repository.searchRepos(query).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io()).subscribe({ list ->
-                _reposList.value = list
-                this.list = list
+                _reposList.value = list.items
             }, {
                 Log.e(ReposViewModel::class.simpleName, it.message.toString())
             })
-    }
-
-    fun searchRepo(query: String) {
-        _reposList.value = list.filter {
-            it.name.contains(query, true)
-        }
     }
 }
 

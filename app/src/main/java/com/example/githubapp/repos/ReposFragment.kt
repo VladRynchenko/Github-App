@@ -42,13 +42,12 @@ class ReposFragment : Fragment() {
         binding = FragmentReposBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getRepos()
+        viewModel.getRepos(REPOS_ALL)
+        initRecycleView()
 
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
-            viewModel.searchRepo(text.toString())
+            viewModel.getRepos(text.toString())
         }
-
-        initRecycleView()
 
         viewModel.reposList.observe(viewLifecycleOwner, { reposList ->
             adapter.submitList(reposList)

@@ -15,13 +15,12 @@
         android:layout_height="match_parent">
 
         <EditText
+            android:hint="@string/search_hint"
             android:layout_margin="10dp"
             android:id="@+id/search_repos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
-            android:textColor="@color/primaryTextColor"
-            tools:text="git"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
