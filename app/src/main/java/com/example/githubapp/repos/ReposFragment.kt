@@ -30,7 +30,6 @@ class ReposFragment : Fragment() {
     lateinit var viewModel: ReposViewModel
     lateinit var binding: FragmentReposBinding
     lateinit var adapter: ReposRecycleView
-    private var searchJob: Job? = null
 
     override fun onAttach(context: Context) {
         (context.applicationContext as MyApplication).appComponent.userComponent().create(context)
@@ -48,12 +47,14 @@ class ReposFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         initRecycleView()
-        search(REPOS_ALL)
+        viewModel.getRepos(REPOS_ALL)
 
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
-            search(text.toString())
+            viewModel.getRepos(text.toString())
         }
-
+        viewModel.repos.observe(viewLifecycleOwner, { flow ->
+            lifecycleScope.launch { flow.collect { adapter.submitData(it) } }
+        })
 
 
         return binding.root
@@ -62,15 +63,6 @@ class ReposFragment : Fragment() {
     private fun initRecycleView() {
         adapter = ReposRecycleView()
         binding.list.adapter = adapter
-    }
-
-    private fun search(query: String) {
-        searchJob?.cancel()
-        searchJob = lifecycleScope.launch {
-            viewModel.getRepos(query).collect {
-                adapter.submitData(it)
-            }
-        }
     }
 
 }
