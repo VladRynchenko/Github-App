@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.githubapp.api.GitHubApi
+import com.example.githubapp.models.DataItem
 import com.example.githubapp.models.Repos
 import com.example.githubapp.profile.UserManager
 import com.example.githubapp.repos.GithubRepoDataSource
@@ -15,7 +16,7 @@ class GithubRepository @Inject constructor(
     private val userManager: UserManager
 ) {
 
-    fun getSearchResultStream(query: String): Flow<PagingData<Repos>> {
+    fun getSearchResultStream(query: String): Flow<PagingData<DataItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,

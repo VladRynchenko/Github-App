@@ -12,11 +12,7 @@ import javax.inject.Inject
 
 class ReposViewModel @Inject constructor(private val repository: GithubRepository) : ViewModel() {
 
-    private var currentQueryValue: String? = null
-    private var currentSearchResult: Flow<PagingData<DataItem>>? = null
-
-
-    fun getRepos(query: String): Flow<PagingData<Repos>> {
+    fun getRepos(query: String): Flow<PagingData<DataItem>> {
         val result = repository.getSearchResultStream(query).cachedIn(viewModelScope)
         return result
     }
