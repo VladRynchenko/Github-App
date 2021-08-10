@@ -8,7 +8,12 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.githubapp.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_reposFragment"
+            app:destination="@id/reposFragment"
+            app:enterAnim="@android:anim/fade_in" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.githubapp.auth.LoginFragment"
@@ -19,4 +24,8 @@
             app:popUpTo="@id/navigation.xml"
             app:popUpToInclusive="false" />
     </fragment>
+    <fragment
+        android:id="@+id/reposFragment"
+        android:name="com.example.githubapp.repos.ReposFragment"
+        android:label="ReposFragment" />
 </navigation>
