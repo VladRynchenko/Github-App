@@ -53,7 +53,7 @@ class ReposFragment : Fragment() {
             viewModel.getRepos(text.toString())
         }
         viewModel.repos.observe(viewLifecycleOwner, { flow ->
-            lifecycleScope.launch { flow.collect { adapter.submitData(it) } }
+            lifecycleScope.launchWhenStarted { flow.collect { adapter.submitData(it) } }
         })
 
 
