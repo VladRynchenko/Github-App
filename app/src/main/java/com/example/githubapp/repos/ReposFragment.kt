@@ -12,12 +12,15 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentReposBinding
 import com.example.githubapp.models.Repos
 import com.example.githubapp.viewmodels.ViewModelProvideFactory
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,6 +33,8 @@ class ReposFragment : Fragment() {
     lateinit var viewModel: ReposViewModel
     lateinit var binding: FragmentReposBinding
     lateinit var adapter: ReposRecycleView
+    var search: String = REPOS_ALL
+    var job: Job? = null
 
     override fun onAttach(context: Context) {
         (context.applicationContext as MyApplication).appComponent.userComponent().create(context)
@@ -47,15 +52,11 @@ class ReposFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         initRecycleView()
-        viewModel.getRepos(REPOS_ALL)
+        searchRepo(REPOS_ALL)
 
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
-            viewModel.getRepos(text.toString())
+            searchRepo(text.toString().trim())
         }
-        viewModel.repos.observe(viewLifecycleOwner, { flow ->
-            lifecycleScope.launchWhenStarted { flow.collect { adapter.submitData(it) } }
-        })
-
 
         return binding.root
     }
@@ -63,6 +64,14 @@ class ReposFragment : Fragment() {
     private fun initRecycleView() {
         adapter = ReposRecycleView()
         binding.list.adapter = adapter
+    }
+
+    private fun searchRepo(search: String) {
+        lifecycleScope.launchWhenStarted {
+            viewModel.searchRepo(search).collect {
+                adapter.submitData(lifecycle, it)
+            }
+        }
     }
 
 }
