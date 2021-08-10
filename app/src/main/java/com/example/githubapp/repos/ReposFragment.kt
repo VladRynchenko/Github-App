@@ -11,10 +11,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentReposBinding
 import com.example.githubapp.models.Repos
 import com.example.githubapp.viewmodels.ViewModelProvideFactory
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 const val REPOS_ALL = ""
@@ -26,6 +30,7 @@ class ReposFragment : Fragment() {
     lateinit var viewModel: ReposViewModel
     lateinit var binding: FragmentReposBinding
     lateinit var adapter: ReposRecycleView
+    private var searchJob: Job? = null
 
     override fun onAttach(context: Context) {
         (context.applicationContext as MyApplication).appComponent.userComponent().create(context)
@@ -42,22 +47,30 @@ class ReposFragment : Fragment() {
         binding = FragmentReposBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getRepos(REPOS_ALL)
         initRecycleView()
+        search(REPOS_ALL)
 
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
-            viewModel.getRepos(text.toString())
+            search(text.toString())
         }
 
-        viewModel.reposList.observe(viewLifecycleOwner, { reposList ->
-            adapter.submitList(reposList)
-        })
+
+
         return binding.root
     }
 
     private fun initRecycleView() {
         adapter = ReposRecycleView()
         binding.list.adapter = adapter
+    }
+
+    private fun search(query: String) {
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
+            viewModel.getRepos(query).collect {
+                adapter.submitData(it)
+            }
+        }
     }
 
 }

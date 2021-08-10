@@ -2,6 +2,7 @@ package com.example.githubapp.repos
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,13 +12,13 @@ import com.example.githubapp.models.DataItem
 import com.example.githubapp.models.NoResult
 import com.example.githubapp.models.Repos
 
-class ReposRecycleView : ListAdapter<DataItem, RecyclerView.ViewHolder>(diffUtil) {
+class ReposRecycleView : PagingDataAdapter<Repos, RecyclerView.ViewHolder>(diffUtil) {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         item.let {
             when (item) {
                 is Repos -> (holder as RepoViewHolder).bind(item)
-                is NoResult -> (holder as TextViewHolder).bind()
+//                is NoResult -> (holder as TextViewHolder).bind()
             }
         }
     }
@@ -34,19 +35,27 @@ class ReposRecycleView : ListAdapter<DataItem, RecyclerView.ViewHolder>(diffUtil
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is NoResult -> R.layout.repo_view_item_no_res
+//            is NoResult -> R.layout.repo_view_item_no_res
             is Repos -> R.layout.repo_view_item
             else -> throw UnsupportedOperationException("Unknown view")
         }
     }
 }
 
-val diffUtil = object : DiffUtil.ItemCallback<DataItem>() {
-    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+val diffUtil = object : DiffUtil.ItemCallback<Repos>() {
+    override fun areItemsTheSame(oldItem: Repos, newItem: Repos): Boolean {
         return oldItem.full_name == newItem.full_name
     }
 
-    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+    override fun areContentsTheSame(oldItem: Repos, newItem: Repos): Boolean {
         return oldItem == newItem
     }
+//val diffUtil = object : DiffUtil.ItemCallback<DataItem>() {
+//    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+//        return oldItem.full_name == newItem.full_name
+//    }
+//
+//    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+//        return oldItem == newItem
+//    }
 }
