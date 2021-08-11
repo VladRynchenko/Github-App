@@ -17,10 +17,11 @@ import javax.inject.Inject
 
 class ReposViewModel @Inject constructor(private val repository: GithubRepository) : ViewModel() {
 
+    var response: Flow<PagingData<DataItem>>? = null
 
-    fun searchRepo(queryString: String): Flow<PagingData<DataItem>> {
-        return repository.getSearchResultStream(queryString)
-            .cachedIn(viewModelScope)
+    fun searchRepo(queryString: String) {
+        response = repository.getSearchResultStream(queryString)
+            .cachedIn(viewModelScope).distinctUntilChanged()
     }
 }
 

@@ -2,24 +2,17 @@ package com.example.githubapp.repos
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentReposBinding
-import com.example.githubapp.models.Repos
 import com.example.githubapp.viewmodels.ViewModelProvideFactory
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,8 +26,6 @@ class ReposFragment : Fragment() {
     lateinit var viewModel: ReposViewModel
     lateinit var binding: FragmentReposBinding
     lateinit var adapter: ReposRecycleView
-    var search: String = REPOS_ALL
-    var job: Job? = null
 
     override fun onAttach(context: Context) {
         (context.applicationContext as MyApplication).appComponent.userComponent().create(context)
@@ -52,10 +43,16 @@ class ReposFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         initRecycleView()
-        searchRepo(REPOS_ALL)
+        viewModel.searchRepo(REPOS_ALL)
 
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
-            searchRepo(text.toString().trim())
+                viewModel.searchRepo(text.toString().trim())
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.response?.collectLatest {
+                adapter.submitData(lifecycle, it)
+            }
         }
 
         return binding.root
@@ -64,14 +61,6 @@ class ReposFragment : Fragment() {
     private fun initRecycleView() {
         adapter = ReposRecycleView()
         binding.list.adapter = adapter
-    }
-
-    private fun searchRepo(search: String) {
-        lifecycleScope.launchWhenStarted {
-            viewModel.searchRepo(search).collect {
-                adapter.submitData(lifecycle, it)
-            }
-        }
     }
 
 }
