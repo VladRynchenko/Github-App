@@ -2,6 +2,7 @@ package com.example.githubapp.repos
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import com.example.githubapp.models.DataItem
 import com.example.githubapp.models.NoResult
 import com.example.githubapp.models.Repos
 
-class ReposRecycleView : ListAdapter<DataItem, RecyclerView.ViewHolder>(diffUtil) {
+class ReposRecycleView : PagingDataAdapter<DataItem, RecyclerView.ViewHolder>(diffUtil) {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         item.let {

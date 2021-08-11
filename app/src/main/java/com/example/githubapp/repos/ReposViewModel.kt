@@ -1,34 +1,31 @@
 package com.example.githubapp.repos
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.githubapp.models.DataItem
-import com.example.githubapp.models.NoResult
-import com.example.githubapp.repository.ProfileRepository
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.example.githubapp.repository.GithubRepository
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ReposViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
+class ReposViewModel @Inject constructor(private val repository: GithubRepository) : ViewModel() {
 
-    private val _reposList = MutableLiveData<List<DataItem>>()
-    val reposList: LiveData<List<DataItem>>
-        get() = _reposList
+    private val _currentRequest = MutableLiveData<String>(REPOS_ALL)
 
+    val data = _currentRequest
+        .switchMap {
+            repository
+                .getSearchResultStream(it)
+                .cachedIn(viewModelScope)
+                .debounce(200)
+                .asLiveData()
+        }
 
-    fun getRepos(query: String) {
-        repository.searchRepos(query).observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io()).subscribe({ list ->
-                if (list.items.isNotEmpty())
-                    _reposList.value = list.items
-                else
-                    _reposList.value = listOf(NoResult())
-
-            }, {
-                Log.e(ReposViewModel::class.simpleName, it.message.toString())
-            })
+    fun searchRepo(request: String) {
+        _currentRequest.postValue(request)
     }
 }
 

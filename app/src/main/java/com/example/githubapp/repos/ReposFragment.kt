@@ -2,18 +2,15 @@ package com.example.githubapp.repos
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentReposBinding
-import com.example.githubapp.models.Repos
 import com.example.githubapp.viewmodels.ViewModelProvideFactory
 import javax.inject.Inject
 
@@ -42,16 +39,16 @@ class ReposFragment : Fragment() {
         binding = FragmentReposBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getRepos(REPOS_ALL)
         initRecycleView()
 
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
-            viewModel.getRepos(text.toString())
+            viewModel.searchRepo(text.toString().trim())
         }
-
-        viewModel.reposList.observe(viewLifecycleOwner, { reposList ->
-            adapter.submitList(reposList)
+        viewModel.data.observe(viewLifecycleOwner, {
+            adapter.submitData(lifecycle, it)
         })
+
+
         return binding.root
     }
 

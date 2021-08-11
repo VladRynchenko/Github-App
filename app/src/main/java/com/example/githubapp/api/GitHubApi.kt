@@ -20,9 +20,9 @@ interface GitHubApi {
     fun getRepos(): Single<List<Repos>>
 
     @GET("search/repositories")
-    fun searchRepos(
+    suspend fun searchRepos(
         @Query("q") query: String,
         @Query("per_page") per_page: Int,
         @Query("page") page: Int
-    ): Single<SearchResponse>
+    ): SearchResponse
 }
