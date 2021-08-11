@@ -12,9 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentReposBinding
 import com.example.githubapp.viewmodels.ViewModelProvideFactory
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 const val REPOS_ALL = ""
@@ -46,15 +43,14 @@ class ReposFragment : Fragment() {
         viewModel.searchRepo(REPOS_ALL)
 
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
-                viewModel.searchRepo(text.toString().trim())
+            viewModel.searchRepo(text.toString().trim())
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.response?.collectLatest {
-                adapter.submitData(lifecycle, it)
+        viewModel.repos.observe(viewLifecycleOwner, {
+            lifecycleScope.launchWhenStarted {
+                adapter.submitData(it)
             }
-        }
-
+        })
         return binding.root
     }
 

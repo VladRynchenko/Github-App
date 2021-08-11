@@ -5,10 +5,10 @@ import androidx.paging.PagingState
 import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.models.DataItem
 import com.example.githubapp.models.NoResult
-import com.example.githubapp.models.Repos
 import com.example.githubapp.profile.UserManager
 import com.example.githubapp.repository.STARTING_PAGE
 import com.example.githubapp.repository.USER_QUALIFIER
+import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -31,6 +31,7 @@ class GithubRepoDataSource(
         val position = params.key ?: STARTING_PAGE
         val apiQuery = query + USER_QUALIFIER + userManager.userData?.login
         return try {
+            delay(200)
             val response = service.searchRepos(apiQuery, params.loadSize, position)
             val repos: List<DataItem> =
                 if (response.total_count > 0) response.items else listOf(NoResult())
