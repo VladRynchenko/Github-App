@@ -40,7 +40,6 @@ class ReposFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         initRecycleView()
-        viewModel.searchRepo(REPOS_ALL)
 
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
             viewModel.searchRepo(text.toString().trim())

@@ -8,7 +8,6 @@ import com.example.githubapp.models.NoResult
 import com.example.githubapp.profile.UserManager
 import com.example.githubapp.repository.STARTING_PAGE
 import com.example.githubapp.repository.USER_QUALIFIER
-import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 

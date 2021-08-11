@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class ReposViewModel @Inject constructor(private val repository: GithubRepository) : ViewModel() {
 
-    private val _currentRequest = MutableLiveData<String>()
+    private val _currentRequest = MutableLiveData<String>(REPOS_ALL)
 
     val data = _currentRequest
         .switchMap {
