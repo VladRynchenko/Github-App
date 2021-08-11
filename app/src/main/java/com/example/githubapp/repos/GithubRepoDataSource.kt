@@ -31,7 +31,6 @@ class GithubRepoDataSource(
         val position = params.key ?: STARTING_PAGE
         val apiQuery = query + USER_QUALIFIER + userManager.userData?.login
         return try {
-            delay(200)
             val response = service.searchRepos(apiQuery, params.loadSize, position)
             val repos: List<DataItem> =
                 if (response.total_count > 0) response.items else listOf(NoResult())
