@@ -45,12 +45,11 @@ class ReposFragment : Fragment() {
         binding.searchRepos.doOnTextChanged { text, start, before, count ->
             viewModel.searchRepo(text.toString().trim())
         }
-
-        viewModel.repos.observe(viewLifecycleOwner, {
-            lifecycleScope.launchWhenStarted {
-                adapter.submitData(it)
-            }
+        viewModel.data.observe(viewLifecycleOwner, {
+            adapter.submitData(lifecycle, it)
         })
+
+
         return binding.root
     }
 
