@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.githubapp.profile.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_reposFragment"
             app:destination="@id/reposFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.githubapp.auth.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_profileFragment"
             app:destination="@id/profileFragment"
@@ -27,5 +27,22 @@
     <fragment
         android:id="@+id/reposFragment"
         android:name="com.example.githubapp.repos.ReposFragment"
-        android:label="ReposFragment" />
+        android:label="ReposFragment">
+
+        <action
+            android:id="@+id/action_reposFragment_to_repoFragment"
+            app:destination="@id/repoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/repoFragment"
+        android:name="com.example.githubapp.repo.RepoFragment"
+        android:label="RepoFragment">
+        <argument
+            android:name="owner"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+
+    </fragment>
 </navigation>

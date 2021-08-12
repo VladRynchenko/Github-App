@@ -28,4 +28,10 @@ fun roundCount(view: TextView, int: Int) {
     }
 }
 
+@BindingAdapter("app:bindLanguage")
+fun bindLanguage(view: TextView, language: String?) {
+    view.visibility = if (language.isNullOrEmpty()) View.GONE else View.VISIBLE
+    view.text = view.resources.getString(R.string.language, language)
+}
+
 

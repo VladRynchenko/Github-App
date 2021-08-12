@@ -6,6 +6,7 @@ import com.example.githubapp.models.UserData
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GitHubApi {
@@ -16,8 +17,11 @@ interface GitHubApi {
     @GET("user/starred")
     fun getStarred(): Single<List<Repos>>
 
-    @GET("user/repos")
-    fun getRepos(): Single<List<Repos>>
+    @GET("repos/{owner}/{name}")
+    fun getRepo(
+        @Path("owner") owner: String,
+        @Path("name") name: String
+    ): Single<Repos>
 
     @GET("search/repositories")
     suspend fun searchRepos(
@@ -25,4 +29,6 @@ interface GitHubApi {
         @Query("per_page") per_page: Int,
         @Query("page") page: Int
     ): SearchResponse
+
+
 }

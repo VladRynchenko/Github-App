@@ -29,4 +29,8 @@ class ProfileRepository @Inject constructor(
     fun getStarredList(): Single<List<Repos>> {
         return retrofit.getStarred()
     }
+
+    fun getRepo(owner: String, name: String): Single<Repos> {
+        return retrofit.getRepo(owner, name)
+    }
 }
