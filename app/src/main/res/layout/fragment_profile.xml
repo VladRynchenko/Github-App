@@ -142,12 +142,12 @@
             android:layout_marginStart="5dp"
             android:src="@drawable/ic_round_star_outline_24"
             app:layout_constraintBottom_toBottomOf="@+id/textFollowing"
-            app:layout_constraintEnd_toStartOf="@+id/counterStar"
+            app:layout_constraintEnd_toStartOf="@+id/starCounter"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textFollowing" />
 
         <TextView
-            android:id="@+id/counterStar"
+            android:id="@+id/starCounter"
             style="@style/ProfileBoltTextSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

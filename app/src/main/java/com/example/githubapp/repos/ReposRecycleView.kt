@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapp.R
 import com.example.githubapp.databinding.RepoViewItemBinding
@@ -12,12 +11,13 @@ import com.example.githubapp.models.DataItem
 import com.example.githubapp.models.NoResult
 import com.example.githubapp.models.Repos
 
-class ReposRecycleView : PagingDataAdapter<DataItem, RecyclerView.ViewHolder>(diffUtil) {
+class ReposRecycleView(val clickListener: ReposListener) :
+    PagingDataAdapter<DataItem, RecyclerView.ViewHolder>(diffUtil) {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         item.let {
             when (item) {
-                is Repos -> (holder as RepoViewHolder).bind(item)
+                is Repos -> (holder as RepoViewHolder).bind(item, clickListener)
                 is NoResult -> (holder as TextViewHolder).bind()
             }
         }
@@ -50,4 +50,8 @@ val diffUtil = object : DiffUtil.ItemCallback<DataItem>() {
     override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
         return oldItem == newItem
     }
+}
+
+class ReposListener(val clickListener: (repoId: Repos) -> Unit) {
+    fun onClick(repo: Repos) = clickListener(repo)
 }

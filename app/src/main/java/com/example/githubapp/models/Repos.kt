@@ -6,6 +6,7 @@ data class Repos(
     val name: String,
     val description: String?,
     val url: String,
+    val owner: UserData,
     val stars: Int,
     val forks: Int,
     val language: String?

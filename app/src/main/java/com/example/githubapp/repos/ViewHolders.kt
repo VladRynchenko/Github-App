@@ -15,22 +15,14 @@ class RepoViewHolder(private val binding: RepoViewItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
     private var repos: Repos? = null
 
-    init {
-        binding.root.setOnClickListener {
-            repos?.url?.let { url ->
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                binding.root.context.startActivity(intent)
-            }
-        }
-    }
-
-    fun bind(repos: Repos?) {
+    fun bind(repos: Repos?, clickListener: ReposListener?) {
         this.repos = repos
         val resources = itemView.resources
         binding.apply {
             if (repos != null) {
                 this.repos = repos
                 repoLanguage.text = resources.getString(R.string.language, repos.language)
+                this.clickListener = clickListener
             } else {
                 repoName.text = resources.getString(R.string.loading)
                 repoDescription.visibility = View.GONE
@@ -47,7 +39,7 @@ class RepoViewHolder(private val binding: RepoViewItemBinding) :
 
 class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(){
+    fun bind() {
 
     }
 

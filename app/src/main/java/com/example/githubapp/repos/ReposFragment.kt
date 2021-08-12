@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentReposBinding
 import com.example.githubapp.viewmodels.ViewModelProvideFactory
@@ -53,7 +53,13 @@ class ReposFragment : Fragment() {
     }
 
     private fun initRecycleView() {
-        adapter = ReposRecycleView()
+        adapter = ReposRecycleView(ReposListener {
+            findNavController().navigate(
+                ReposFragmentDirections.actionReposFragmentToRepoFragment(
+                    it.owner.login, it.name
+                )
+            )
+        })
         binding.list.adapter = adapter
     }
 
