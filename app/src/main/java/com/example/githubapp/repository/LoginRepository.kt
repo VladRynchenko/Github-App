@@ -18,12 +18,10 @@ class LoginRepository @Inject constructor(
     }
 
     fun saveToken(token: AccessToken) {
-        Log.e("Save token", token.accessToken)
         storage.saveToken(token)
     }
 
     fun getToken(): AccessToken? {
-        Log.e("GetToken", storage.getToken()?.accessToken.toString())
         return storage.getToken()
     }
 
