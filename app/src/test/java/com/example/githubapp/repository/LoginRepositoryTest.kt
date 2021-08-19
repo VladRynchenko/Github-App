@@ -11,6 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Spy
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -21,10 +22,11 @@ class LoginRepositoryTest {
     @Mock
     lateinit var api: GitHubAuthApi
 
-    @Mock
+    @Spy
     lateinit var storage: Storage
 
     private val token = AccessToken("token", "tokenType")
+    private val emptyToken = AccessToken("null", "null")
 
 
     @Before
@@ -34,6 +36,9 @@ class LoginRepositoryTest {
         Mockito.`when`(storage.getToken()).thenReturn(token)
         Mockito.`when`(api.getToken(CLIENT_ID, CLIENT_SECRET, "code"))
             .thenReturn(Observable.just(token))
+        Mockito.`when`(
+            api.getToken(CLIENT_ID, CLIENT_SECRET, "incorrect_code")
+        ).thenReturn(Observable.just(emptyToken))
     }
 
 
@@ -46,13 +51,17 @@ class LoginRepositoryTest {
     @Test
     fun getTokenWithIncorrectCode() {
         val result = repository.getAccessToken("incorrect_code")
-        assertNull(result)
+        result.test().assertValue(emptyToken)
     }
 
     @Test
-    fun successSaveAndTakeToken() {
-        repository.saveToken(token)
+    fun takeToken() {
         assertEquals(token, repository.getToken())
+    }
+
+    @Test
+    fun saveToken() {
+        repository.saveToken(token)
     }
 
 
