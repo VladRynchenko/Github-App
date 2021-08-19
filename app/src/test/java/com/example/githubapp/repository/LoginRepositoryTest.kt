@@ -62,6 +62,7 @@ class LoginRepositoryTest {
     @Test
     fun saveToken() {
         repository.saveToken(token)
+        Mockito.verify(storage).saveToken(token)
     }
 
 
