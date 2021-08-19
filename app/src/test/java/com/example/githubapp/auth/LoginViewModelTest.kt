@@ -13,6 +13,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
 
 class LoginViewModelTest {
@@ -20,6 +21,7 @@ class LoginViewModelTest {
     lateinit var repository: LoginRepository
     private lateinit var viewModel: LoginViewModel
     private val token = AccessToken("token", "tokenType")
+    private val emptyToken = AccessToken("null", "null")
 
     @get:Rule
     val rxSchedulerRule = RxSchedulerRule()
@@ -34,21 +36,29 @@ class LoginViewModelTest {
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
         viewModel = LoginViewModel(repository)
         Mockito.`when`(repository.getAccessToken("code")).thenReturn(Observable.just(token))
+        Mockito.`when`(repository.getAccessToken("error"))
+            .thenReturn(Observable.error(Throwable("HTTP 401")))
         Mockito.`when`(repository.getToken()).thenReturn(token)
     }
 
     @Test
     fun getAccessToken() {
         viewModel.getAccessToken("code")
-        verify(repository).saveToken(token)
-        verify(repository).getToken()
+        val value = viewModel.token.value
+        assertEquals(token, value)
     }
 
     @Test
     fun getSavedToken() {
         viewModel.getSavedToken()
         verify(repository).getToken()
-        val value = viewModel.token.getOrAwaitValue()
+        val value = viewModel.token.value
         assertEquals(token, value)
+    }
+
+    @Test
+    fun checkNotSaveWhenErrorAccessToken() {
+        viewModel.getAccessToken("error")
+        verify(repository, never()).saveToken(emptyToken)
     }
 }
