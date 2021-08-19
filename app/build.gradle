@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -77,9 +80,12 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     //Paging
-    implementation "androidx.paging:paging-rxjava2:$paging_version"
-    implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
+    //Mock
+    testImplementation "org.mockito:mockito-core:3.3.1"
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
 
 
 }
