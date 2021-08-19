@@ -41,6 +41,7 @@ class LoginViewModelTest {
     fun getAccessToken() {
         viewModel.getAccessToken("code")
         verify(repository).saveToken(token)
+        verify(repository).getToken()
     }
 
     @Test
