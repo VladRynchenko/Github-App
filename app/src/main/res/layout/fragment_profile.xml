@@ -21,15 +21,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/circleImageView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:scr="@{viewModel.userData.avatar_url}"
-            tools:src="@drawable/profile" />
+            tools:src="@drawable/placeholder" />
 
 
         <TextView

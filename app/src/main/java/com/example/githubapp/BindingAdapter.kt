@@ -15,7 +15,11 @@ fun hideIfNull(view: View, string: String?) {
 
 @BindingAdapter("app:scr")
 fun uploadImage(view: ImageView, string: String?) {
-    Picasso.with(view.context).load(string).into(view)
+    Picasso.with(view.context)
+        .load(string)
+        .placeholder(R.drawable.placeholder)
+        .transform(CircularTransformation())
+        .into(view)
 }
 
 @BindingAdapter("app:roundingCount")
