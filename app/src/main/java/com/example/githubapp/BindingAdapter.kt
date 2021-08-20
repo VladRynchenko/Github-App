@@ -13,13 +13,13 @@ fun hideIfNull(view: View, string: String?) {
     view.visibility = if (string.isNullOrEmpty()) View.GONE else View.VISIBLE
 }
 
-@BindingAdapter("app:scr")
-fun uploadImage(view: ImageView, string: String?) {
-    Picasso.with(view.context)
+@BindingAdapter(value = ["scr", "rounded"], requireAll = false)
+fun uploadImage(view: ImageView, string: String?, rounded: Boolean) {
+    val pic = Picasso.with(view.context)
         .load(string)
         .placeholder(R.drawable.placeholder)
-        .transform(CircularTransformation())
-        .into(view)
+    if (rounded) pic.transform(CircularTransformation())
+    pic.into(view)
 }
 
 @BindingAdapter("app:roundingCount")

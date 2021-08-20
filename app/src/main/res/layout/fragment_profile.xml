@@ -30,6 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:rounded="@{true}"
             app:scr="@{viewModel.userData.avatar_url}"
             tools:src="@drawable/placeholder" />
 
@@ -60,9 +61,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/primaryTextColor"
-            android:text="@string/nav_repos"
             android:background="@drawable/button_light_background"
+            android:text="@string/nav_repos"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
