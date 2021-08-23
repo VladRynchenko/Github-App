@@ -26,6 +26,6 @@ class GithubRepository @Inject constructor(
     }
 
     companion object {
-        private const val NETWORK_PAGE_SIZE = 50
+        const val NETWORK_PAGE_SIZE = 50
     }
 }

@@ -2,22 +2,17 @@ package com.example.githubapp.repo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.githubapp.RxSchedulerRule
-import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.models.Repos
 import com.example.githubapp.models.UserData
-import com.example.githubapp.profile.UserManager
 import com.example.githubapp.repository.ProfileRepository
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Rule
-import org.junit.rules.TestWatcher
+import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
 
 class RepoViewModelTest {
 
