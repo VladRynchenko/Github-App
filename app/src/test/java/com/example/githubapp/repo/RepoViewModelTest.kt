@@ -6,8 +6,7 @@ import com.example.githubapp.models.Repos
 import com.example.githubapp.models.UserData
 import com.example.githubapp.repository.ProfileRepository
 import io.reactivex.rxjava3.core.Single
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -50,6 +49,6 @@ class RepoViewModelTest {
     fun testGetRepoWhenError() {
         viewModel.getRepo("login", "error")
         val value = viewModel.repo.value
-        assertNotNull(value)
+        assertNull(value)
     }
 }
