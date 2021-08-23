@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.githubapp.repos.ReposViewModel" />
+            type="com.example.githubapp.ui.repos.RepoListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

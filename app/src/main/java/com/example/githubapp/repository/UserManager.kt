@@ -1,4 +1,4 @@
-package com.example.githubapp.profile
+package com.example.githubapp.repository
 
 import com.example.githubapp.models.UserData
 import javax.inject.Inject

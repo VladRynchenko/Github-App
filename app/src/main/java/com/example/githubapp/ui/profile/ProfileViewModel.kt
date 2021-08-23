@@ -1,4 +1,4 @@
-package com.example.githubapp.profile
+package com.example.githubapp.ui.profile
 
 import android.util.Log
 import androidx.lifecycle.*

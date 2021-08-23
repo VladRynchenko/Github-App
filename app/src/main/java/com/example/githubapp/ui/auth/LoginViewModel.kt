@@ -1,4 +1,4 @@
-package com.example.githubapp.auth
+package com.example.githubapp.ui.auth
 
 import android.util.Log
 import androidx.lifecycle.LiveData

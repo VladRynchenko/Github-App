@@ -1,4 +1,4 @@
-package com.example.githubapp.main
+package com.example.githubapp.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.example.githubapp.repository.LoginRepository

@@ -10,6 +10,8 @@ import com.example.githubapp.models.DataItem
 import com.example.githubapp.models.Repos
 import com.example.githubapp.models.UserData
 import com.example.githubapp.repository.GithubRepository
+import com.example.githubapp.ui.repos.RepoListViewModel
+import com.example.githubapp.ui.repos.diffUtil
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,7 +28,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
 @ExperimentalCoroutinesApi
-class ReposViewModelTest {
+class RepoListViewModelTest {
     @Rule
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -35,7 +37,7 @@ class ReposViewModelTest {
     private val testScope = TestCoroutineScope(testDispatcher)
 
     lateinit var repository: GithubRepository
-    lateinit var viewModel: ReposViewModel
+    lateinit var viewModel: RepoListViewModel
     private val userData =
         UserData("login", null, null, 0, null, null, null, null, null, null, null, null)
     private val repo = Repos("repo", 0, "repo", null, "url", userData, 0, 0, null)
@@ -44,7 +46,7 @@ class ReposViewModelTest {
     @Before
     fun setUp() {
         repository = Mockito.mock(GithubRepository::class.java)
-        viewModel = ReposViewModel(repository)
+        viewModel = RepoListViewModel(repository)
         Dispatchers.setMain(testDispatcher)
     }
 

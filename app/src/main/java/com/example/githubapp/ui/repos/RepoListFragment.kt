@@ -1,4 +1,4 @@
-package com.example.githubapp.repos
+package com.example.githubapp.ui.repos
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentReposBinding
-import com.example.githubapp.viewmodels.ViewModelProvideFactory
+import com.example.githubapp.viewmodelsfactory.ViewModelProvideFactory
 import javax.inject.Inject
 
 const val REPOS_ALL = ""
@@ -20,14 +20,14 @@ class ReposFragment : Fragment() {
 
     @Inject
     lateinit var factory: ViewModelProvideFactory
-    lateinit var viewModel: ReposViewModel
+    lateinit var viewModel: RepoListViewModel
     lateinit var binding: FragmentReposBinding
     lateinit var adapter: ReposRecycleView
 
     override fun onAttach(context: Context) {
         (context.applicationContext as MyApplication).appComponent.userComponent().create(context)
             .inject(this)
-        viewModel = ViewModelProvider(this, factory).get(ReposViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(RepoListViewModel::class.java)
         super.onAttach(context)
     }
 

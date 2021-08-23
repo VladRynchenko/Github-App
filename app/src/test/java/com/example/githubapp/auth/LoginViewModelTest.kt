@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.githubapp.RxSchedulerRule
 import com.example.githubapp.api.AccessToken
 import com.example.githubapp.repository.LoginRepository
+import com.example.githubapp.ui.auth.LoginViewModel
 import io.reactivex.rxjava3.core.Observable
 import org.junit.Assert.assertEquals
 import org.junit.Before

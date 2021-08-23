@@ -4,7 +4,6 @@ import com.example.githubapp.RxSchedulerRule
 import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.models.Repos
 import com.example.githubapp.models.UserData
-import com.example.githubapp.profile.UserManager
 import io.reactivex.rxjava3.core.Single
 import org.junit.Before
 import org.junit.Rule

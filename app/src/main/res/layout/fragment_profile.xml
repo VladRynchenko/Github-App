@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.githubapp.profile.ProfileViewModel" />
+            type="com.example.githubapp.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

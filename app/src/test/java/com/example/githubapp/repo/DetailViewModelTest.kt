@@ -5,6 +5,7 @@ import com.example.githubapp.RxSchedulerRule
 import com.example.githubapp.models.Repos
 import com.example.githubapp.models.UserData
 import com.example.githubapp.repository.ProfileRepository
+import com.example.githubapp.ui.repo.DetailViewModel
 import io.reactivex.rxjava3.core.Single
 import org.junit.Assert.*
 import org.junit.Before
@@ -13,7 +14,7 @@ import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 
-class RepoViewModelTest {
+class DetailViewModelTest {
 
     @get:Rule
     val rxSchedulerRule = RxSchedulerRule()
@@ -22,7 +23,7 @@ class RepoViewModelTest {
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var viewModel: RepoViewModel
+    lateinit var viewModel: DetailViewModel
     private lateinit var repository: ProfileRepository
 
     private val userData =
@@ -33,7 +34,7 @@ class RepoViewModelTest {
     @Before
     fun setUp() {
         repository = Mockito.mock(ProfileRepository::class.java)
-        viewModel = RepoViewModel(repository)
+        viewModel = DetailViewModel(repository)
         `when`(repository.getRepo("login", "repo")).thenReturn(Single.just(repo))
         `when`(repository.getRepo("login", "error")).thenReturn(Single.error(Throwable("HTTP 401")))
     }

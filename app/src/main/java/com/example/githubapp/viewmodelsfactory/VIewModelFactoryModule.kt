@@ -1,12 +1,12 @@
-package com.example.githubapp.viewmodels
+package com.example.githubapp.viewmodelsfactory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubapp.auth.LoginViewModel
-import com.example.githubapp.main.MainViewModel
-import com.example.githubapp.profile.ProfileViewModel
-import com.example.githubapp.repo.RepoViewModel
-import com.example.githubapp.repos.ReposViewModel
+import com.example.githubapp.ui.auth.LoginViewModel
+import com.example.githubapp.ui.main.MainViewModel
+import com.example.githubapp.ui.profile.ProfileViewModel
+import com.example.githubapp.ui.repo.DetailViewModel
+import com.example.githubapp.ui.repos.RepoListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -36,12 +36,12 @@ abstract class ViewModelFactoryModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ReposViewModel::class)
-    internal abstract fun bindReposViewModel(viewModel: ReposViewModel): ViewModel
+    @ViewModelKey(RepoListViewModel::class)
+    internal abstract fun bindReposViewModel(viewModel: RepoListViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(RepoViewModel::class)
-    internal abstract fun bindRepoViewModel(viewModel: RepoViewModel): ViewModel
+    @ViewModelKey(DetailViewModel::class)
+    internal abstract fun bindRepoViewModel(viewModel: DetailViewModel): ViewModel
 
 }

@@ -1,4 +1,4 @@
-package com.example.githubapp.repo
+package com.example.githubapp.ui.repo
 
 import android.content.Context
 import android.os.Bundle
@@ -10,20 +10,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentRepoBinding
-import com.example.githubapp.viewmodels.ViewModelProvideFactory
+import com.example.githubapp.viewmodelsfactory.ViewModelProvideFactory
 import javax.inject.Inject
 
-class RepoFragment : Fragment() {
+class DetailFragment : Fragment() {
 
     @Inject
     lateinit var factory: ViewModelProvideFactory
-    lateinit var viewModel: RepoViewModel
-    private val args: RepoFragmentArgs by navArgs()
+    lateinit var viewModel: DetailViewModel
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
         (context.applicationContext as MyApplication).appComponent.userComponent().create(context)
             .inject(this)
-        viewModel = ViewModelProvider(this, factory).get(RepoViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(DetailViewModel::class.java)
         super.onAttach(context)
     }
 

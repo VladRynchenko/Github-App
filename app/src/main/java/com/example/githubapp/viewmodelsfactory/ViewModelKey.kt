@@ -1,4 +1,4 @@
-package com.example.githubapp.viewmodels
+package com.example.githubapp.viewmodelsfactory
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

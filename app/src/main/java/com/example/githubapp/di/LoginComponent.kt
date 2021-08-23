@@ -1,6 +1,7 @@
-package com.example.githubapp.auth
+package com.example.githubapp.di
 
 import android.content.Context
+import com.example.githubapp.ui.auth.LoginFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
 

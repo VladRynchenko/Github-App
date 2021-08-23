@@ -1,4 +1,4 @@
-package com.example.githubapp.repo
+package com.example.githubapp.ui.repo
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class RepoViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
+class DetailViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
 
     private val _repo = MutableLiveData<Repos>()
     val repo: LiveData<Repos>
@@ -21,7 +21,7 @@ class RepoViewModel @Inject constructor(private val repository: ProfileRepositor
             .observeOn(AndroidSchedulers.mainThread()).subscribe({
                 _repo.value = it
             }, {
-                Log.e(RepoViewModel::class.simpleName, it.message.toString())
+                Log.e(DetailViewModel::class.simpleName, it.message.toString())
             })
     }
 

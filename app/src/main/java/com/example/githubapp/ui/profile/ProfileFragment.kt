@@ -1,4 +1,4 @@
-package com.example.githubapp.profile
+package com.example.githubapp.ui.profile
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.githubapp.MyApplication
 import com.example.githubapp.R
 import com.example.githubapp.databinding.FragmentProfileBinding
-import com.example.githubapp.viewmodels.ViewModelProvideFactory
+import com.example.githubapp.viewmodelsfactory.ViewModelProvideFactory
 import javax.inject.Inject
 
 class ProfileFragment() : Fragment() {

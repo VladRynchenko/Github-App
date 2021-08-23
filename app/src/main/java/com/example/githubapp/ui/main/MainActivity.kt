@@ -1,4 +1,4 @@
-package com.example.githubapp.main
+package com.example.githubapp.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.githubapp.MyApplication
 import com.example.githubapp.R
-import com.example.githubapp.viewmodels.ViewModelProvideFactory
+import com.example.githubapp.viewmodelsfactory.ViewModelProvideFactory
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

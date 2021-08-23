@@ -5,8 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.models.DataItem
-import com.example.githubapp.profile.UserManager
-import com.example.githubapp.repos.GithubRepoDataSource
+import com.example.githubapp.ui.repos.GithubRepoDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

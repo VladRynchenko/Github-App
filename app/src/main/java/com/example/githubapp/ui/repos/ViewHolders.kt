@@ -1,4 +1,4 @@
-package com.example.githubapp.repos
+package com.example.githubapp.ui.repos
 
 import android.content.Intent
 import android.net.Uri

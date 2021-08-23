@@ -5,8 +5,7 @@ import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.models.Repos
 import com.example.githubapp.models.SearchResponse
 import com.example.githubapp.models.UserData
-import com.example.githubapp.profile.UserManager
-import com.example.githubapp.repos.GithubRepoDataSource
+import com.example.githubapp.ui.repos.GithubRepoDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals

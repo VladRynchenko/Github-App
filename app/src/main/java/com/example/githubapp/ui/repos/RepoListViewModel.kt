@@ -1,4 +1,4 @@
-package com.example.githubapp.repos
+package com.example.githubapp.ui.repos
 
 import androidx.lifecycle.*
 import androidx.paging.cachedIn
@@ -6,7 +6,7 @@ import com.example.githubapp.repository.GithubRepository
 import kotlinx.coroutines.flow.debounce
 import javax.inject.Inject
 
-class ReposViewModel @Inject constructor(private val repository: GithubRepository) : ViewModel() {
+class RepoListViewModel @Inject constructor(private val repository: GithubRepository) : ViewModel() {
 
     private val _currentRequest = MutableLiveData<String>(REPOS_ALL)
 

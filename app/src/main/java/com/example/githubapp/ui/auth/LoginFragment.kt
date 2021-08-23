@@ -1,4 +1,4 @@
-package com.example.githubapp.auth
+package com.example.githubapp.ui.auth
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.githubapp.MyApplication
 import com.example.githubapp.databinding.FragmentLoginBinding
-import com.example.githubapp.viewmodels.ViewModelProvideFactory
+import com.example.githubapp.viewmodelsfactory.ViewModelProvideFactory
 import com.example.githubapp.secret.CLIENT_ID
 import javax.inject.Inject
 

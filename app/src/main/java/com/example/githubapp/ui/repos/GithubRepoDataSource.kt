@@ -1,11 +1,11 @@
-package com.example.githubapp.repos
+package com.example.githubapp.ui.repos
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.models.DataItem
 import com.example.githubapp.models.NoResult
-import com.example.githubapp.profile.UserManager
+import com.example.githubapp.repository.UserManager
 import com.example.githubapp.repository.STARTING_PAGE
 import com.example.githubapp.repository.USER_QUALIFIER
 import retrofit2.HttpException

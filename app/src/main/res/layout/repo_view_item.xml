@@ -11,7 +11,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.githubapp.repos.ReposListener" />
+            type="com.example.githubapp.ui.repos.ReposListener" />
 
     </data>
 

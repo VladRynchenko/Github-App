@@ -2,13 +2,9 @@ package com.example.githubapp.repository
 
 import com.example.githubapp.api.GitHubApi
 import com.example.githubapp.models.Repos
-import com.example.githubapp.models.SearchResponse
 import com.example.githubapp.models.UserData
-import com.example.githubapp.profile.UserManager
 import io.reactivex.rxjava3.core.Single
-import okhttp3.internal.userAgent
 import javax.inject.Inject
-import javax.inject.Singleton
 
 const val PER_PAGE = 100
 const val STARTING_PAGE = 1
